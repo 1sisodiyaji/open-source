@@ -1,6 +1,11 @@
 import { createCanvas } from 'canvas';
+import { NextApiResponse } from 'next'; 
 
-export async function GET(req: Request) {
+export async function GET(req: Request,res:NextApiResponse) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   try {
     const url = new URL(req.url);
     const name = url.searchParams.get('name') || 'Codesaarthi team';
