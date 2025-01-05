@@ -1,16 +1,12 @@
 import { createCanvas } from 'canvas';
-import { NextApiResponse } from 'next'; 
 
-export async function GET(req: Request,res:NextApiResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  try {
-    const url = new URL(req.url);
+export async function GET(req: Request) {
+   const url = new URL(req.url);
     const name = url.searchParams.get('name') || 'Codesaarthi team';
     const color = url.searchParams.get('color') || '#22D3EE';
 
+  try {
+   
     if (!name) {
       return new Response(JSON.stringify({ error: 'Name parameter is required' }), {
         status: 400,
@@ -54,7 +50,8 @@ export async function GET(req: Request,res:NextApiResponse) {
 
     return new Response(JSON.stringify({ imageUrl }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' , 'Access-Control-Allow-Origin': '*' },
+      
     });
   } catch (error) {
     console.error('Error occurred:', error);
